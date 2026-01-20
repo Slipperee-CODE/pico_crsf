@@ -4,9 +4,11 @@
 #include "crsf.h"
 
 void (*on_update_rc_channels_callback)(packed_payload_t*);
+uart_inst_t* UART_PORT;
 
 void crsf_init(uart_inst_t* uart_port, uint8_t uart_tx, uint8_t uart_rx, void (*users_on_update_rc_channels_callback)(packed_payload_t*)){
-    uart_init(uart_port, 420000);
+    UART_PORT = uart_port;
+    uart_init(UART_PORT, 420000);
     gpio_set_function(uart_tx, GPIO_FUNC_UART);
     gpio_set_function(uart_rx, GPIO_FUNC_UART);
     on_update_rc_channels_callback = users_on_update_rc_channels_callback;
@@ -26,8 +28,8 @@ void crsf_read_incoming_frames(){
     static int crsf_curr_frame_index = 0;
     static int crsf_len = 0;
 
-    if (uart_is_readable(uart1)) { //TO DO: MAKE SURE CRC IS CHECKED BEFORE PROCESSING FRAME
-        uint8_t next_byte = uart_getc(uart1);
+    if (uart_is_readable(UART_PORT)) { //TO DO: MAKE SURE CRC IS CHECKED BEFORE PROCESSING FRAME
+        uint8_t next_byte = uart_getc(UART_PORT);
 
         // State Machine to find packets
         if (crsf_curr_frame_index == 0) {

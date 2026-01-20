@@ -2,9 +2,9 @@
 #include "pico/stdlib.h"
 #include "crsf.h"
 
-#define CRSF_UART_PORT uart0
-#define CRSF_UART_TX 3
-#define CRSF_UART_RX 4
+#define CRSF_UART_PORT uart1
+#define CRSF_UART_TX 8
+#define CRSF_UART_RX 9
 
 void on_update_rc_channels(packed_payload_t* channels){
     printf("The value of channel 0 is %d", channels->channel0);
