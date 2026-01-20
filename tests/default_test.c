@@ -2,13 +2,23 @@
 #include "pico/stdlib.h"
 #include "crsf.h"
 
+#define CRSF_UART_PORT uart0
+#define CRSF_UART_TX 3
+#define CRSF_UART_RX 4
+
+void on_update_rc_channels(packed_payload_t* channels){
+    printf("The value of channel 0 is %d", channels->channel0);
+}
+
 int main()
 {
     stdio_init_all();
+
+    crsf_init(CRSF_UART_PORT, CRSF_UART_TX, CRSF_UART_RX, on_update_rc_channels);
     
     while (true) {
-        printf("This loop prints the first 8 received channel values! \n");
+        printf("This loop prints the value of channel0 \n");
         pico_crsf_is_library_accesible();
-        //printf("Acceleration along x-axis is %d gs\n", accelerometer_get_x());
+        crsf_read_incoming_frames();
     }
 }

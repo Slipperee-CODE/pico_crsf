@@ -1446,14 +1446,14 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "default_test::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-default_test-Release-4e20d5198456b4317230.json",
+					"jsonFile" : "target-default_test-Release-ee76f321cb3d57d4f079.json",
 					"name" : "default_test",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "pico_crsf::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-pico_crsf-Release-9771a34543329d8f59e2.json",
+					"jsonFile" : "target-pico_crsf-Release-f4c54357b16d4f6569ef.json",
 					"name" : "pico_crsf",
 					"projectIndex" : 0
 				},

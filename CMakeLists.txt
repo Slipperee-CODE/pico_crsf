@@ -35,7 +35,7 @@ target_include_directories(pico_crsf PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 target_link_libraries(pico_crsf
     pico_stdlib
-    hardware_i2c
+    hardware_uart
 )
 
 if (PROJECT_IS_TOP_LEVEL)
