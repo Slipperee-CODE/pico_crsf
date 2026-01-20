@@ -3,7 +3,7 @@
 #include "hardware/uart.h"
 #include "crsf.h"
 
-packed_payload_t* (*on_update_rc_channels_callback)();
+void (*on_update_rc_channels_callback)(packed_payload_t*);
 
 void crsf_init(uart_inst_t* uart_port, uint8_t uart_tx, uint8_t uart_rx, void (*users_on_update_rc_channels_callback)(packed_payload_t*)){
     uart_init(uart_port, 420000);
