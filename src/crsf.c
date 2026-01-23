@@ -1,6 +1,4 @@
 #include <stdio.h>
-#include "pico/stdlib.h"
-#include "hardware/uart.h"
 #include "crsf.h"
 
 void (*on_update_rc_channels_callback)(packed_payload_t*);

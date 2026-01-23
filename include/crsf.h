@@ -1,5 +1,9 @@
 #pragma once
 
+#include "stdint.h"
+#include "pico/stdlib.h"
+#include "hardware/uart.h"
+
 #define CRSF_SYNC_BYTE 0xC8
 #define CRSF_MAX_PACKET_LEN 64
 
