@@ -1,4 +1,5 @@
-#pragma once
+#ifndef CRSF_H
+#define CRSF_H
 
 #include "stdint.h"
 #include "pico/stdlib.h"
@@ -34,3 +35,5 @@ packed_payload_t* crsf_process_frame_internal(uint8_t* frame);
 void crsf_read_incoming_frames();
 
 void pico_crsf_is_library_accesible();
+
+#endif
