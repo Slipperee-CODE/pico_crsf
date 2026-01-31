@@ -25,8 +25,8 @@ int crsf_check_crc(uint8_t* payload, uint8_t payload_len, uint8_t crc_byte){
     // THE BELOW CODE IS AI AND COULD DEFINITELY BE WRONG
 
     uint8_t calculated_crc_byte = 0; // Initial value is 0
-    for (uint8_t i = 0; i < len; i++) {
-        calculated_crc_byte ^= *ptr++;
+    for (uint8_t i = 0; i < payload_len; i++) {
+        calculated_crc_byte ^= *payload++;
         for (uint8_t j = 0; j < 8; j++) {
             if (calculated_crc_byte & 0x80) {
                 calculated_crc_byte = (calculated_crc_byte << 1) ^ 0xD5;
