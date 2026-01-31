@@ -21,6 +21,24 @@ packed_payload_t* crsf_process_frame_internal(uint8_t* frame){
     }
 }
 
+int crsf_check_crc(uint8_t* payload, uint8_t payload_len, uint8_t crc_byte){
+    // THE BELOW CODE IS AI AND COULD DEFINITELY BE WRONG
+
+    uint8_t calculated_crc_byte = 0; // Initial value is 0
+    for (uint8_t i = 0; i < len; i++) {
+        calculated_crc_byte ^= *ptr++;
+        for (uint8_t j = 0; j < 8; j++) {
+            if (calculated_crc_byte & 0x80) {
+                calculated_crc_byte = (calculated_crc_byte << 1) ^ 0xD5;
+            } else {
+                calculated_crc_byte <<= 1;
+            }
+        }
+    }
+
+    return calculated_crc_byte == crc_byte;
+}
+
 void crsf_read_incoming_frames(){
     static uint8_t crsf_buffer[CRSF_MAX_PACKET_LEN];
     static int crsf_curr_frame_index = 0;
@@ -47,9 +65,11 @@ void crsf_read_incoming_frames(){
             // Read rest of packet
             crsf_buffer[crsf_curr_frame_index++] = next_byte;
             // Check if we have received the full packet
-            // Total bytes = 1 (Sync) + 1 (Len) + Len
-            if (crsf_curr_frame_index >= crsf_len + 2) {
-                on_update_rc_channels_callback(crsf_process_frame_internal(crsf_buffer));
+            // Total bytes = 1 (Sync) + 1 (Len) + Len + 1 (CRC)
+            if (crsf_curr_frame_index >= crsf_len + 3) {
+                if (crsf_check_crc(&crsf_buffer[2], crsf_buffer[1], next_byte)){
+                    on_update_rc_channels_callback(crsf_process_frame_internal(crsf_buffer));
+                }
                 crsf_curr_frame_index = 0; // Reset for next packet
             }
         }
