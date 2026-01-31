@@ -65,11 +65,11 @@ void crsf_read_incoming_frames(){
             // Read rest of packet
             crsf_buffer[crsf_curr_frame_index++] = next_byte;
             // Check if we have received the full packet
-            // Total bytes = 1 (Sync) + 1 (Len) + Len + 1 (CRC)
-            if (crsf_curr_frame_index >= crsf_len + 3) {
-                if (crsf_check_crc(&crsf_buffer[2], crsf_buffer[1], next_byte)){
-                    on_update_rc_channels_callback(crsf_process_frame_internal(crsf_buffer));
-                }
+            // Total bytes = 1 (Sync) + 1 (Len) + Len // + 1 (CRC)
+            if (crsf_curr_frame_index >= crsf_len + 2) {
+                //if (crsf_check_crc(&crsf_buffer[2], crsf_buffer[1], next_byte)){
+                on_update_rc_channels_callback(crsf_process_frame_internal(crsf_buffer));
+                //}
                 crsf_curr_frame_index = 0; // Reset for next packet
             }
         }
