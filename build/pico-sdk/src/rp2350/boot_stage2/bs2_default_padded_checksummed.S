@@ -1,4 +1,4 @@
-// Padded and checksummed version of: C:/Users/CAIS/Documents/GitHubRepositories/pico_crsf/build/pico-sdk/src/rp2350/boot_stage2/bs2_default.bin
+// Padded and checksummed version of: C:/Users/schei/Documents/pico_crsf/build/pico-sdk/src/rp2350/boot_stage2/bs2_default.bin
 
 .cpu cortex-m0plus
 .thumb
